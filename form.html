@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" 
-    rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" 
-    crossorigin="anonymous">
+    <title>Covert Channel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://getbootstrap.com/docs/5.0/examples/cover/cover.css">
-    <title>New Message</title>
 </head>
 
 <body class="d-flex h-100 text-center text-white bg-dark">
@@ -17,15 +14,13 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         
         <main role="main" class="inner cover" >
-          <form action="/data_save" name="newfile" id="newfile" method="post"></form>
-          <textarea name="message" id="message" class = "form-control" 
-          placeholder="Enter your message"></textarea><br>
+          <form action="/datasave" method="post"></form>
+          <input type="text" name="message" id="message" placeholder="Enter your message" class="form-control"><br>
           <button class="btn btn-warning">Confirm</button>
         </main>
         
     </div>
         
 </body>
+
 </html>
-
-
