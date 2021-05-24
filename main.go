@@ -4,15 +4,10 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 )
 
-// transit ..
-type transit struct {
-	message string
-}
-
 func index(w http.ResponseWriter, r *http.Request) {
-	var bob transit
 	tmp, err := template.ParseFiles("templates/index.html")
 
 	if err != nil {
@@ -22,12 +17,11 @@ func index(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprint(w, err.Error())
 	}
-	tmp.Execute(w, bob)
+	tmp.Execute(w, nil)
 
 }
 
 func send(w http.ResponseWriter, r *http.Request) {
-	var bob transit
 	tmp, err := template.ParseFiles("templates/form.html")
 
 	if err != nil {
@@ -38,12 +32,25 @@ func send(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, err.Error())
 	}
 
-	tmp.Execute(w, bob)
+	tmp.Execute(w, nil)
+}
+
+func datasave(w http.ResponseWriter, r *http.Request) {
+	message := r.FormValue("message")
+	existfile, err := os.Open("message.txt")
+	if err != nil {
+		fmt.Fprint(w, err.Error())
+	}
+	existfile.Write([]byte(message))
+	existfile.Close()
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
 func handlerequest() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/send", send)
+	http.HandleFunc("/datasave", datasave)
 	http.ListenAndServe(":8080", nil)
 }
 
